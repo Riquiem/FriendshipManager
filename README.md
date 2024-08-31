@@ -1,70 +1,117 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Friendship Manager DApp
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+FriendshipManager is a decentralized application (dApp) built using React, Solidity, and web3 technologies. The application allows users to manage friendships on the Ethereum blockchain. Users can add, remove, and view their friends, as well as see friends of friends and their friendship history. The project also integrates decentralized friend recommendations using Circles, and it leverages subgraphs to track and query smart contract data.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Add Friend:** Users can add new friends by inputting the wallet address of the friend.
+2. **Remove Friend:** Users can remove a friend from their list.
+3. **Friends List:** Displays a list of all the user's friends.
+4. **Friends of Friends:** Shows friends of the user's friends.
+5. **Friendship History:** Provides a history of friendship interactions.
+6. **Decentralized Friend Recommendations:** Recommends friends based on mutual connections.
+7. **Graph Integration:** Uses subgraphs to track and query smart contracts for efficient data retrieval and relationship mapping.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Node.js** and **npm** installed.
+- **MetaMask** browser extension for Ethereum wallet management.
 
-### `npm run build`
+### Clone the Repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+\`\`\`bash
+git clone https://github.com/yourusername/friendship-manager-dapp.git
+cd friendship-manager-dapp
+\`\`\`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Install Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+\`\`\`bash
+npm install
+\`\`\`
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Start the Application**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   \`\`\`bash
+   npm start
+   \`\`\`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Interact with the DApp**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   - On startup, the DApp will prompt the user to input their Ethereum wallet address.
+   - Users can manage their friendships using the provided features.
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **/src**
+  - **/components**
+    - **AddFriend.js**: Component for adding a new friend.
+    - **RemoveFriend.js**: Component for removing a friend.
+    - **FriendsList.js**: Component for listing friends.
+    - **FriendsOfFriends.js**: Component for showing friends of friends.
+    - **FriendshipHistory.js**: Component for viewing friendship history.
+    - **FriendRecommendations.js**: Component for decentralized friend recommendations.
+  - **App.js**: Main application component.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **/graphs**
+  - **subgraph.yaml**: Configuration for tracking the FriendshipManager smart contract.
+  - **schema.graphql**: GraphQL schema for querying data.
+  
+##Circles Integration
 
-### Code Splitting
+The project integrates Circles for decentralized friend recommendations. Circles uses trust relationships to recommend new friends to users based on their existing connections.
+## Graph Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The project integrates graph technology to enable efficient querying of the FriendshipManager smart contract. The subgraph tracks contract events, allowing users to easily retrieve and visualize data, such as friendship connections and history.
 
-### Analyzing the Bundle Size
+### Querying the Subgraph
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can query the subgraph using GraphQL. Below is an example of how to fetch all friends of a user:
 
-### Making a Progressive Web App
+\`\`\`graphql
+{
+  user(id: "0xUserAddress") {
+    friends {
+      id
+      name
+    }
+  }
+}
+\`\`\`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Deployment
 
-### Advanced Configuration
+### Build the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+\`\`\`bash
+npm run build
+\`\`\`
 
-### Deployment
+### Deploying the Subgraph
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Ensure you have the Graph CLI installed:
 
-### `npm run build` fails to minify
+   \`\`\`bash
+   npm install -g @graphprotocol/graph-cli
+   \`\`\`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Deploy the subgraph:
+
+   \`\`\`bash
+   graph deploy --product hosted-service <your-subgraph-name>
+   \`\`\`
+
+## Contribution
+
+Contributions are welcome! Please fork the repository and submit a pull request for any features or improvements.
+
+## License
+
+This project is licensed under the MIT License.
